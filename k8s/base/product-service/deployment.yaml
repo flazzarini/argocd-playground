@@ -19,7 +19,7 @@ spec:
       - name: product-service
         image: nginx:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         env:
         - name: MONGODB_DATABASE
           valueFrom:
@@ -36,15 +36,15 @@ spec:
             configMapKeyRef:
               name: product-service-config
               key: log_level
-        # livenessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 8080
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 10
-        # readinessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 8080
-        #   initialDelaySeconds: 5
-        #   periodSeconds: 50
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 50
