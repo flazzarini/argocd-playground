@@ -21,16 +21,16 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: MONGODB_USERNAME 
-          valueFrom: secret
-          keyRef: 
-            name: mongodb-secret 
-            key: username
-        - name: MONGODB_PASSWORD 
-          valueFrom: secret
-          keyRef: 
-            name: mongodb-secret 
-            key: password
+        - name: MONGODB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: username
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: password
         - name: MONGODB_URI 
           value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-headless:27017"
         - name: MONGODB_DATABASE
